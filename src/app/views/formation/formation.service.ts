@@ -30,7 +30,7 @@ export class FormationService {
       price : 250,
       placeMax : 45,
       tags: ['Java', 'Springboot'],
-      distance: 25
+      distance: 35
     }
   ]);
 
