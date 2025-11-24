@@ -31,6 +31,7 @@ export class FormationCatalogComponent {
 
   catalog = computed(() => {
     return this.formationService.getCatalog().filter(formation => {
+
       return formation.title.toLowerCase().includes(this.textFilter()) && formation.distance <= this.distanceFilter();
     });
   });
