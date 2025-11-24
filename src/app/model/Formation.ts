@@ -1,5 +1,4 @@
 export type Formation = {
-
   time: string;
   id: string;
   title: string;
@@ -9,5 +8,5 @@ export type Formation = {
   price: number;
   tags: string[];
   distance: number;
-  placeMax : number;
+  placeMax: number;
 }

@@ -1,4 +1,4 @@
-<h1>{{ formation.title }}</h1>
+<h1>{{ formation().title }}</h1>
 <div class="flex flex-col gap-2 p-4">
   <div class="flex gap-2">
     <div class="font-bold">Lieu :</div>
@@ -11,6 +11,5 @@
     <p>{{formation.price}}</p>
   </div>
   <p>{{ formation.description }}</p>
-
   <app-formation-tags [tags]="formation.tags"></app-formation-tags>
 </div>

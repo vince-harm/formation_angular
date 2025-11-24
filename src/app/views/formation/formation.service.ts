@@ -1,40 +1,54 @@
 import {computed, Injectable, signal} from '@angular/core';
 import {Formation} from '../../model/Formation';
-import {UUID, uuid} from '../../shared/uuid';
+import {UUID} from '../../shared/uuid';
+
+interface FormationDTO {
+  id: UUID;
+  title: string;
+  description: string;
+  location: string;
+  date: string;
+  time: string;
+  price: string;
+  placeMax: string;
+  tags: string[];
+  distance: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormationService {
 
-  private readonly catalog = signal<Formation[]>([
-    {
-      id: uuid(),
-      title: 'Angular - premiers pas',
-      description: 'Fais tes premiers pas avec Angular',
-      location: 'EPHEC',
-      date: new Date("2025-09-20T10:30:00"),
-      time: '18:00 - 21:00',
-      price : 150,
-      placeMax : 25,
-      tags: ['Angular', 'TypeScript'],
-      distance: 10
-    },
-    {
-      id: uuid(),
-      title: 'Java - Springboot',
-      description: 'Découvrez Springboot',
-      location: 'Remote',
-      date: new Date("2026-01-10T10:30:00"),
-      time: '14:00 - 17:00',
-      price : 250,
-      placeMax : 45,
-      tags: ['Java', 'Springboot'],
-      distance: 35
-    }
-  ]);
+  private readonly catalog = signal<Formation[]>([]);
 
   constructor() {
+    this.fetchFormations();
+  }
+
+  private fetchFormations() {
+    fetch('http://localhost:8080/formations')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json(); // Parse JSON body
+      })
+      .then((data: FormationDTO[]) => {
+        this.catalog.set(data.map(f => {
+          return {
+            ...f,
+            date: new Date(f.date),
+            price: parseFloat(f.price),
+            placeMax: parseInt(f.placeMax, 10),
+            distance: Math.floor(Math.random() * 100)
+          }
+        }));
+      })
+      .catch(error => {
+        console.error('Fetch error:', error);
+      });
   }
 
   getCatalog = this.catalog.asReadonly()

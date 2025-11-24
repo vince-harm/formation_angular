@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormationService} from '../formation.service';
 import {Formation} from '../../../model/Formation';
