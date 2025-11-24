@@ -1,4 +1,5 @@
 export type Formation = {
+
   time: string;
   id: string;
   title: string;

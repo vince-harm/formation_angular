@@ -1,5 +1,6 @@
 <div [formGroup]="form" class="flex flex-col gap-2 md:w-3xl">
   <h1>Ajouter une formation au catalogue</h1>
+
   <mat-form-field>
     <mat-label>Titre</mat-label>
     <input matInput formControlName="title" placeholder="Titre de la formation"/>
@@ -23,18 +24,21 @@
 
   <mat-form-field>
     <mat-label>Horaire</mat-label>
-    <input matInput formControlName="time" placeholder="HH:MM - HH:MM"/>
-    <mat-hint>Exemple : 18:00 - 21:00</mat-hint>
+    <mat-select formControlName="time">
+      <mat-option value="18:00 - 21:00">18:00 - 21:00</mat-option>
+      <mat-option value="14:00 - 17:00">14:00 - 17:00</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <mat-label>Prix (€)</mat-label>
+    <input matInput type="number" formControlName="price" placeholder="200" />
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Prix</mat-label>
-    <input matInput formControlName="price" placeholder="Prix"/>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Nombre de place Maximum</mat-label>
-    <input matInput formControlName="placeMax"/>
+    <mat-label>Places maximum</mat-label>
+    <input matInput type="number" formControlName="placeMax" placeholder="30" />
   </mat-form-field>
 
   <mat-form-field>
@@ -48,10 +52,7 @@
     <mat-hint>Tags séparés par une virgule</mat-hint>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Distance</mat-label>
-    <input matInput type="number" formControlName="distance" placeholder="Distance"/>
-  </mat-form-field>
-
-  <button type="submit" (click)="addFormation()" mat-flat-button color ="primary" [disabled]="!form.valid">Ajouter</button>
+  <button type="submit" (click)="addFormation()" mat-button [disabled]="!form.valid">
+    Ajouter
+  </button>
 </div>
